@@ -1,0 +1,8 @@
+# Process monitoring dependency
+psutil>=6.0.0
+
+# Filesystem monitoring dependency
+watchdog>=6.0.0
+
+# Testing dependency
+pytest>=8.0.0

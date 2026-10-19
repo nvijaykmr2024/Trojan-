@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trojan-defense"
+version = "0.1.0"
+description = "Cross-Platform Trojan Defense Using a Cyber Deception and Behavioral Monitoring Framework"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Academic Cybersecurity Research" }
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Security",
+]
+dependencies = [
+    "psutil>=6.0.0",
+    "watchdog>=6.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[project.scripts]
+trojan-defense = "trojan_defense.main:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--basetemp=.pytest_temp"
