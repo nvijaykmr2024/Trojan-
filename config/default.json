@@ -1,0 +1,160 @@
+{
+  "app": {
+    "environment": "development",
+    "debug": false
+  },
+  "logging": {
+    "level": "INFO",
+    "log_to_file": true,
+    "log_dir": "logs",
+    "json_format": false
+  },
+  "endpoint": {
+    "endpoint_id": null,
+    "hostname": null,
+    "agent_version": "0.1.0"
+  },
+  "pipeline": {
+    "batch_size": 50,
+    "max_queue_size": 1000,
+    "validate_events": true,
+    "drop_on_overflow": false
+  },
+  "persistence": {
+    "enabled": true,
+    "driver": "sqlite",
+    "db_path": "trojan_defense.db"
+  },
+  "transport": {
+    "enabled": false,
+    "driver": "mock",
+    "output_file": "events.jsonl",
+    "endpoint_url": "http://127.0.0.1:8080/api/events",
+    "timeout_seconds": 5.0,
+    "retry_count": 2
+  },
+  "backend": {
+    "host": "127.0.0.1",
+    "port": 8080,
+    "max_content_length": 1048576,
+    "default_page_limit": 50,
+    "max_page_limit": 200
+  },
+  "collectors": {
+    "process": false,
+    "file": false,
+    "network": false,
+    "system": false,
+    "privilege": false,
+    "deception": false,
+    "behavior": false,
+    "alerting": false,
+    "response": false
+  },
+  "process_collector": {
+    "enabled": false,
+    "polling_interval": 0.5,
+    "collect_command_line": true,
+    "collect_hashes": false,
+    "max_command_line_length": 2048
+  },
+  "file_collector": {
+    "enabled": false,
+    "monitored_paths": ["runtime/monitored"],
+    "recursive": true,
+    "debounce_ms": 200,
+    "collect_hashes": false,
+    "max_hash_file_size_bytes": 10485760,
+    "ignore_patterns": ["*.tmp", "~*"]
+  },
+  "network_collector": {
+    "enabled": false,
+    "polling_interval": 1.0,
+    "include_loopback": true,
+    "include_listening": true,
+    "include_udp": true,
+    "resolve_process_names": true
+  },
+  "system_collector": {
+    "enabled": false,
+    "polling_interval": 2.0,
+    "monitor_sessions": true,
+    "monitor_event_log": true,
+    "monitor_privileges": true
+  },
+  "deception": {
+    "enabled": false,
+    "deception_root": "runtime/deception",
+    "auto_create_on_startup": true,
+    "cleanup_on_shutdown": false,
+    "interaction_detection_enabled": true,
+    "interaction_debounce_ms": 200,
+    "decoys": []
+  },
+  "behavior": {
+    "enabled": false,
+    "correlation_window_seconds": 60.0,
+    "dedup_window_seconds": 30.0,
+    "max_tracked_processes": 1000,
+    "rules": {}
+  },
+  "risk": {
+    "enabled": true,
+    "min_score": 0,
+    "max_score": 100,
+    "rule_base_scores": {
+      "RULE-BEH-001": 40,
+      "RULE-BEH-002": 30,
+      "RULE-BEH-003": 45,
+      "RULE-BEH-004": 55,
+      "RULE-BEH-005": 75
+    },
+    "default_base_score": 30,
+    "deception_bonus": 25,
+    "privilege_bonus": 20,
+    "network_bonus": 15,
+    "sensitive_file_bonus": 15,
+    "corroboration_bonus_per_event": 5,
+    "max_corroboration_bonus": 15,
+    "severity_thresholds": {
+      "low": 0,
+      "medium": 40,
+      "high": 70,
+      "critical": 90
+    }
+  },
+  "alerting": {
+    "enabled": true,
+    "min_alert_score": 20,
+    "dedup_window_seconds": 60.0,
+    "cooldown_seconds": 300.0
+  },
+  "response": {
+    "enabled": true,
+    "quarantine_dir": "runtime/quarantine",
+    "execution_timeout_seconds": 10.0,
+    "require_authorization": true,
+    "auto_rollback_on_failure": true,
+    "protected_processes": [
+      "System",
+      "Registry",
+      "smss.exe",
+      "csrss.exe",
+      "wininit.exe",
+      "services.exe",
+      "lsass.exe",
+      "svchost.exe",
+      "spoolsv.exe",
+      "explorer.exe",
+      "dwm.exe",
+      "conhost.exe"
+    ],
+    "auth_tokens": {
+      "analyst-token": "ANALYST",
+      "responder-token": "RESPONDER",
+      "admin-token": "ADMIN",
+      "viewer-token": "VIEWER"
+    }
+  }
+}
+
