@@ -1,0 +1,33 @@
+{
+  "app": {
+    "environment": "test",
+    "debug": true
+  },
+  "logging": {
+    "level": "DEBUG",
+    "log_to_file": false,
+    "json_format": false
+  },
+  "pipeline": {
+    "batch_size": 10,
+    "max_queue_size": 100,
+    "validate_events": true,
+    "drop_on_overflow": false
+  },
+  "persistence": {
+    "enabled": true,
+    "driver": "memory",
+    "db_path": ":memory:"
+  },
+  "transport": {
+    "enabled": true,
+    "driver": "mock"
+  },
+  "backend": {
+    "host": "127.0.0.1",
+    "port": 0,
+    "max_content_length": 65536,
+    "default_page_limit": 10,
+    "max_page_limit": 50
+  }
+}
